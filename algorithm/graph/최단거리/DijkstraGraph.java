@@ -68,7 +68,7 @@ class DijkstraGraph {
         System.out.println("최단거리");
         for(int i = 0 ; i < 5 ; i++) {
             if(g.dist[i] == g.INF) continue; // 시작노드에서 해당 i번째 노드까지 연결되어있지 않음
-            System.out.println(start + " -> " + i + " = " + g.dist[i]);
+            else System.out.println(start + " -> " + i + " = " + g.dist[i]); // 실수방지용으로 else
         }
 
     }
@@ -143,7 +143,7 @@ class DijkstraGraphV2 {
         System.out.println("최단거리");
         for(int i = 0 ; i < 5 ; i++) {
             if(g.dist[i] == g.INF) continue; // 시작노드에서 해당 i번째 노드까지 연결되어있지 않음
-            System.out.println(start + " -> " + i + " = " + g.dist[i]);
+            else System.out.println(start + " -> " + i + " = " + g.dist[i]); // 실수방지용으로 else
         }
 
         System.out.println("최단경로");
