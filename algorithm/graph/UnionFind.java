@@ -11,7 +11,8 @@ class UnionFind {
         //parent[v] == v라면(자기 자신을 가리킨다면) 해당 원소는 해당 집합의 대표원소이므로 리턴
         //아니라면 해당 원소는 대표원소가 아니므로 재귀로 타고타고 들어간다.
         if(v == parent[v]) return v;
-        return findSet(parent, parent[v]);
+        // return findSet(parent, parent[v]); //경로압축X
+        return parent[v] = findSet(parent, parent[v]); // 경로압축O 시간초과시 사용
     }
     //u와 v 원소를 포함하는 두 집합을 통합하는 연산
     static void unionSet(int[] parent, int u, int v) {
@@ -58,7 +59,8 @@ class UnionFindV2 {
     static int findSet(int[] parent, int v) {
         // 음수인경우 해당 음수값은 사이즈 * -1을 의미하고 v는 대표원소임을 의미
         if(parent[v] < 0) return v;
-        return findSet(parent, parent[v]);
+        // return findSet(parent, parent[v]); //경로압축X
+        return parent[v] = findSet(parent, parent[v]); // 경로압축O 시간초과시 사용
     }
     //v가 속한 집합의 대표원소를 찾아 -1을 곱해 사이즈 반환
     static int getSetSize(int[] parent, int v) {
