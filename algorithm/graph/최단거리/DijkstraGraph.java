@@ -56,7 +56,7 @@ class DijkstraGraph {
     public static void main(String[] args) throws IOException {
         int size = 5;
         int start = 0;
-        DijkstraGraphV2 g = new DijkstraGraphV2(size);
+        DijkstraGraph g = new DijkstraGraph(size);
 
         g.insertEdge(0,1,10);
         g.insertEdge(1, 2, 4);
