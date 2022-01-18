@@ -5,6 +5,9 @@
 // 이 성질을 바탕으로 시작점부터 경로를 구해 나감으로써 멀리있는 노드까지도 최단거리를 구할 수 있다.
 // 최단거리, 최단경로 다 구할 수 있다.
 
+//인접행렬을 인접리스트로 바꿔 다익스트라 푼 코드
+//https://github.com/suhongkim98/study-algorithm/blob/main/baekjoon/step-by-step/최단경로/Baek1753.java
+
 //DijkstraGraph 는 최단거리만
 //DijkstraGraphV2는 최단거리에 최단경로까지 구하는 코드
 class DijkstraGraph {
