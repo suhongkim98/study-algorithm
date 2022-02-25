@@ -62,7 +62,7 @@ class Kruskal {
         //parent[v] == v라면(자기 자신을 가리킨다면) 해당 원소는 해당 집합의 대표원소이므로 리턴
         //아니라면 해당 원소는 대표원소가 아니므로 재귀로 타고타고 들어간다.
         if(v == parent[v]) return v;
-        return findSet(parent, parent[v]);
+        return parent[v] = findSet(parent, parent[v]);
     }
     //u와 v 원소를 포함하는 두 집합을 통합하는 연산
     static void unionSet(int[] parent, int u, int v) {
