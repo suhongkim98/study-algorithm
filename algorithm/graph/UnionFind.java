@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 //서로소집합 유니온 파인드
 //그래프에서 두 노드(원소)가 같은 집합에 속하는지 검사한다.
 class UnionFind {
@@ -18,11 +20,25 @@ class UnionFind {
     static void unionSet(int[] parent, int u, int v) {
         parent[findSet(parent, u)] = findSet(parent, v);
     }
-  
+
+    // parent 배열 통해 해당 그래프에서 집합의 개수 구하기 // bfs 응용
+    static int getSetCount(int[] parent) { // 집합의 개수 반환
+        boolean[] visit = new boolean[parent.length];
+        int count = 0;
+        for(int i = 0 ; i < parent.length ; i++) {
+            int myParent = UnionFind.findSet(parent, i); // 해당 원소가 속한 집합의 대표 원소 반환
+            if(!visit[myParent]) { // 해당 대표원소를 방문한 적 없다면 카운트하지 않은 집합임
+                count++;
+                visit[myParent] = true;
+            }
+        }
+        return count;
+    }
+
     public static void main(String[] args) throws IOException {
         int[] parent = new int[10];
 
-        //집합 10개 생성
+        //집합 10개 생성 (init)
         for(int i = 0 ; i < 10 ; i++) {
             UnionFind.makeSet(parent, i);
         }
@@ -30,6 +46,7 @@ class UnionFind {
         System.out.println(UnionFind.findSet(parent, 2)); // 2번 원소가 속한 집합의 대표원소는?
         System.out.println(UnionFind.findSet(parent, 3)); // 3번 원소가 속한 집합의 대표원소는?
         System.out.println(UnionFind.findSet(parent, 0)); // 0번 원소가 속한 집합의 대표원소는?
+        System.out.println();
 
         UnionFind.unionSet(parent, 1, 2); // 1번이 속한 집합과 2번이 속한 집합 합연산
         UnionFind.unionSet(parent,3, 0);// 3번이 속한 집합과 0번이 속한 집합 합연산
@@ -37,12 +54,16 @@ class UnionFind {
         System.out.println(UnionFind.findSet(parent, 2)); // 2번 원소가 속한 집합의 대표원소는?
         System.out.println(UnionFind.findSet(parent, 3)); // 3번 원소가 속한 집합의 대표원소는?
         System.out.println(UnionFind.findSet(parent, 0)); // 0번 원소가 속한 집합의 대표원소는?
+        System.out.println();
 
         UnionFind.unionSet(parent, 1, 3); // 1번이 속한 집합과 3번이 속한 집합 합연산
         System.out.println(UnionFind.findSet(parent, 1)); // 1번 원소가 속한 집합의 대표원소는?
         System.out.println(UnionFind.findSet(parent, 2)); // 2번 원소가 속한 집합의 대표원소는?
         System.out.println(UnionFind.findSet(parent, 3)); // 3번 원소가 속한 집합의 대표원소는?
         System.out.println(UnionFind.findSet(parent, 0)); // 0번 원소가 속한 집합의 대표원소는?
+        System.out.println();
+
+        System.out.println("집합의 개수 " + UnionFind.getSetCount(parent));
     }
 }
 
@@ -72,5 +93,51 @@ class UnionFindV2 {
         if(root1 == root2) return; // 대표원소가 같다는 의미는 같은 집합에 있다는 의미로 합집합할 필요 없음
         parent[root1] += parent[root2]; //원소의 개수를 더해줌
         parent[root2] = root1;
+    }
+    // parent 배열 통해 해당 그래프에서 집합의 개수 구하기 // bfs 응용
+    static int getSetCount(int[] parent) { // 집합의 개수 반환
+        boolean[] visit = new boolean[parent.length];
+        int count = 0;
+        for(int i = 0 ; i < parent.length ; i++) {
+            int myParent = UnionFindV2.findSet(parent, i); // 해당 원소가 속한 집합의 대표 원소 반환
+            if(!visit[myParent]) { // 해당 대표원소를 방문한 적 없다면 카운트하지 않은 집합임
+                count++;
+                visit[myParent] = true;
+            }
+        }
+        return count;
+    }
+
+    public static void main(String[] args) throws IOException {
+        int[] parent = new int[10];
+
+        // (init)
+        UnionFindV2.init(parent);
+
+        System.out.println(UnionFindV2.findSet(parent, 1)); // 1번 원소가 속한 집합의 대표원소는?
+        System.out.println(UnionFindV2.findSet(parent, 2)); // 2번 원소가 속한 집합의 대표원소는?
+        System.out.println(UnionFindV2.findSet(parent, 3)); // 3번 원소가 속한 집합의 대표원소는?
+        System.out.println(UnionFindV2.findSet(parent, 0)); // 0번 원소가 속한 집합의 대표원소는?
+        System.out.println();
+
+        UnionFindV2.unionSet(parent, 1, 2); // 1번이 속한 집합과 2번이 속한 집합 합연산
+        UnionFindV2.unionSet(parent,3, 0);// 3번이 속한 집합과 0번이 속한 집합 합연산
+        System.out.println(UnionFindV2.findSet(parent, 1)); // 1번 원소가 속한 집합의 대표원소는?
+        System.out.println(UnionFindV2.findSet(parent, 2)); // 2번 원소가 속한 집합의 대표원소는?
+        System.out.println(UnionFindV2.findSet(parent, 3)); // 3번 원소가 속한 집합의 대표원소는?
+        System.out.println(UnionFindV2.findSet(parent, 0)); // 0번 원소가 속한 집합의 대표원소는?
+        System.out.println();
+
+        UnionFindV2.unionSet(parent, 1, 3); // 1번이 속한 집합과 3번이 속한 집합 합연산
+        System.out.println(UnionFindV2.findSet(parent, 1)); // 1번 원소가 속한 집합의 대표원소는?
+        System.out.println(UnionFindV2.findSet(parent, 2)); // 2번 원소가 속한 집합의 대표원소는?
+        System.out.println(UnionFindV2.findSet(parent, 3)); // 3번 원소가 속한 집합의 대표원소는?
+        System.out.println(UnionFindV2.findSet(parent, 0)); // 0번 원소가 속한 집합의 대표원소는?
+        System.out.println();
+
+        //1번 원소가 속한 집합의 원소개수 구하기
+        System.out.println(UnionFindV2.getSetSize(parent, 1));
+
+        System.out.println("집합의 개수 " + UnionFindV2.getSetCount(parent));
     }
 }
