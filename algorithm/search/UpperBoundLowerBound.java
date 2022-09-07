@@ -4,30 +4,30 @@
 //Upper Bound의 경우 target 값보다 큰 값이 처음 나온 index를 반환한다.
 
 class UpperBoundLowerBound {
-	static int lowerBound(int[] array,  int value) {
-        int low = 0;
-        int high = array.length;
-        while (low < high) {
-            int mid = low + (high - low)/2;
-            if (value <= array[mid]) {
-                high = mid;
+    static int lowerBound(int[] array,  int value) {
+        int start = 0;
+        int end = array.length;
+        while (start < end) {
+            int mid = (start + end) / 2;
+            if (value > array[mid]) {
+                start = mid + 1;
             } else {
-                low = mid + 1;
+                end = mid;
             }
         }
-        return low;
+        return end;
     }
-	static int upperBound(int[] array, int value) {
-        int low = 0;
-        int high = array.length;
-        while (low < high) {
-            int mid = low + (high - low)/2;
+    static int upperBound(int[] array, int value) {
+        int start = 0;
+        int end = array.length;
+        while (start < end) {
+            int mid = (start + end) / 2;
             if (value >= array[mid]) {
-                low = mid + 1;
+                start = mid + 1;
             } else {
-                high = mid;
+                end = mid;
             }
         }
-        return low;
+        return end;
     }
 }
