@@ -2,6 +2,7 @@
 //이진 탐색은 정확히 같은 값의 index를 찾는 것에 비해 
 //Lower Bound는 target 값보다 같거나 큰 값이 처음으로 나올 때 Return
 //Upper Bound의 경우 target 값보다 큰 값이 처음 나온 index를 반환한다.
+//없으면 배열 사이즈 크기 반환
 
 class UpperBoundLowerBound {
     static int lowerBound(int[] array,  int value) {
