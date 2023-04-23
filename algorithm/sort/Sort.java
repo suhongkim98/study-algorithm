@@ -43,6 +43,7 @@ public class Sort {
     //피벗을 기준으로 최대한 비슷한 크기로 이분 파티셔닝을 하는 데 그 의의가 있다.
     // 피벗이 최대값이거나 최소값이면 최악 시간복잡도는 똑같이 n2
     public static void quickSort(int[] arr, int start, int end) {
+        if(start >= end) return;
         //비벗값, 왼쪽 배열 시작점(++), 오른쪽 배열 시작점(--)
         int left = start;
         int right = end;
@@ -65,7 +66,7 @@ public class Sort {
             }
         }
         //두 배열 각각 재귀함수 호출해 퀵정렬
-        if(start < right) quickSort(arr, start, right);
-        if(left < end) quickSort(arr, left, end);
+        quickSort(arr, start, right);
+        quickSort(arr, left, end);
     }
 }
